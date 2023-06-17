@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block meta %}{% endblock meta %}
+
+{% block title %}Edit blog{% endblock title %}
+
+{% block links %}
+<!-- Custom css -->
+<link rel="stylesheet" href="{% static 'css/writeBlog.css' %}">
+
+<!-- tinymce rich text editor cdn -->
+<script src="https://cdn.tiny.cloud/1/b7t8xrl16ct87rgdqk3m9ukx3aw7u79t2fgsx4z94k9ahvgv/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
+{% endblock links %}
+
+{% block body %}
+
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="{{blog_form.title.html_name}}" id="{{blog_form.title.auto_id}}"
+            value="{{blog_form.title.value}}">
+
+        <textarea class="short-desc" name="{{blog_form.short_desc.html_name}}" id="{{blog_form.short_desc.auto_id}}"
+            cols="30" rows="10">{{blog_form.short_desc.value}}</textarea>
+            
+            {% include "richTextEditor.html" with form_name=blog_form.blog_body.html_name form_id=blog_form.blog_body.auto_id value=blog_form.blog_body.value %}
+
+        <input type="submit" value="Update" class="btn">
+</div>
+
+{% endblock body %}
+
+
+{% block scripts %}
+
+<!-- JS for rich text editor -->
+<script>
+    tinymce.init({
+        selector: '#{{blog_form.blog_body.auto_id}}',
+        theme: 'silver',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        height: window.innerHeight * 90 / 100,
+    });
+</script>
+{% endblock scripts %}

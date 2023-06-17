@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block meta %}{% endblock meta %}
+
+{% block title %}404 ERROR {% endblock title %}
+
+{% block links %}
+<!-- swiper css link  -->
+<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+
+<!-- swiper    js link  -->
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<style>
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
+h1 {
+    color: #834e4e;
+    font-size: 6rem;
+}
+</style>
+
+{% endblock links %}
+
+
+
+{% block body %}
+
+<main>
+<h1>404 Page not found :( </h1>
+</main>
+
+{% endblock body %}
+
+
+{% block scripts %}
+
+{% endblock scripts %}

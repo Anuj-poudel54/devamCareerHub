@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load static %}
+{% block meta %}{% endblock meta %}
+
+{% block title %}Devam Career Hub {% endblock title %}
+
+{% block links %}
+<!-- swiper css link  -->
+<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+
+<!-- swiper    js link  -->
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+{% endblock links %}
+
+{% block body %}
+
+   <!-- home section starts  -->
+
+   <section class="home">
+      {% if request.user.is_authenticated %}
+      <div class="add-banner">
+         <form method="POST" onsubmit="{{banner_form.image.html_name}}.disabled=true; return true;" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="{{banner_form.image.auto_id}}">
+               <p class="btn add-banner-label">Add New Banner</p>
+            </label>
+            {{ form.images.label_tag }}
+            {{ form.images }}
+            
+            <input type="file" style="display:none;" id="{{banner_form.image.auto_id}}" class="actual-add-banner" name="{{banner_form.image.html_name}}" multiple>
+         </form>
+      </div>
+      {% endif %}
+      
+      <div class="swiper home-slider">
+
+         <div class="swiper-wrapper">
+
+            {% for banner_image in banner_images %}
+            <div class="swiper-slide slide" style="background:url({{banner_image.image.url}}) no-repeat">
+
+               {% if request.user.is_authenticated %}
+               <div class="delete-banner">
+                  
+                  <a href="{% url 'delete-banner-image' banner_image.uid %}" class="btn">Delete</a>
+               </div>
+                {% endif %}
+            </div>
+
+
+            {% endfor %}
+         </div>
+         {% if banner_images.count > 1 %}
+         <div class="swiper-button-next swiper"></div>
+         <div class="swiper-button-prev swiper"></div>
+         {% endif %}
+
+ </div>
+      
+      
+
+
+   </section>
+
+
+   <!-- services section ends -->
+
+   <!-- home about section starts  -->
+
+   <section class="home-about" id="about">
+
+      <div class="image">
+         <img src="{% static 'images/dch.jpg' %}" alt="">
+      </div>
+
+      <div class="content">
+         <h3>About us</h3>
+         <p>DCH is established with the motive to provide up-to –Date College and university information, right
+            academic counseling, visa documentation guidelines and fast service. Two approaches are very
+            important to us at DCH firstly, understand your profile and then giving professional legal advice with
+            unmatched personal attention to each one of our clients in obtaining their visas.</p>
+         <a href="{% url 'about' %}" class="btn">Read more</a>
+      </div>
+
+   </section>
+
+   <section class="home-packages">
+      <div id="second">
+         <h3 class="heading-title"> Program </h3>
+
+         <div class="box-container">
+
+            <div class="box">
+               <div class="image">
+                  <img src="{% static 'images/visa1.jpg' %}" alt="">
+               </div>
+               <div class="content">
+                  <h3> STUDENT VISA</h3>
+                  <p> UAE,Malta,Australia,New Zealand,canada&UK</p>
+                  
+                
+               </div>
+            </div>
+
+            <div class="box">
+               <div class="image">
+                  <img src="{% static 'images/language.png' %}" alt="">
+               </div>
+               <div class="content">
+                  <h3>LANGUAGE</h3>
+                  <p> IETPS,PTE,Japanese & other more classes</p>
+                  
+    
+               </div>
+            </div>
+
+            <div class="box">
+               <div class="image">
+                  <img src="{% static 'images/student.jpg' %}" alt="">
+               </div>
+               <div class="content">
+                  <h3>TUTION</h3>
+                  <p>  Demand on Student</p>
+                 
+               </div>
+               
+               
+               
+            </div>
+
+<div class="box">
+               <div class="image">
+                  <img src="{% static 'images/language.png' %}" alt="">
+               </div>
+               <div class="content">
+                  <h3>Jobs</h3>
+                  <p></p>
+                
+    
+               </div>
+            </div>
+         </div>
+         
+                
+        
+
+   </section>
+
+
+   <!-- home packages section ends -->
+
+   <!-- home offer section starts  -->
+
+   <section class="home-offer">
+      <div class="content">
+         <h3>UP TO 100% scholarship</h3>
+         <p>Devam Career is for personalized guidance at every step.You can use various resources to find study abroad scholarships: university websites, online scholarship databases, official study abroad pages for individual countries, and so on. The most common types of scholarships are academic or merit-based, need-based, athletic-based, region or minority-based, etc.</p>
+         <a href="#third" class="btn">Contact Now</a>
+      </div>
+   </section>
+
+   <!-- home offer section ends -->
+
+{% endblock body %}
+
+
+{% block scripts %}
+
+{% endblock scripts %}

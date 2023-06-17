@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    {% load static %}
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Devam Career Hub - Educate. Empower. Excel.">
+  <meta name="keywords" content="Devam Career Hub, education consultancy, career guidance, educational success, devam career, hub, career, educational consultant, consultancy, study, abroad, study in dubai, study in europe, study abroad">
+  <meta name="author" content="Devam Career Hub">
+  <meta property="og:title" content="Devam Career Hub - Educate. Empower. Excel.">
+  <meta property="og:description" content="Devam Career Hub provides expert career guidance and educational consultancy to help you achieve your goals.">
+  <meta property="og:image" content="https://devamcareerhub.com/static/images/dch.jpg">
+  <meta property="og:url" content="http://www.devamcareerhub.com">
+  <meta name="facebook:card" content="summary">
+  <meta name="facebook:title" content="Devam Career Hub">
+  <meta name="facebook:description" content="Hub where you can find solution for studying in Dubai or Eurpoe.">
+  <meta name="facebook:image" content="https://scontent.fbdp2-1.fna.fbcdn.net/v/t39.30808-6/336075894_754551796035934_3463687729810482464_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=e3f864&_nc_ohc=uuUj8pF934YAX_fJpCJ&_nc_ht=scontent.fbdp2-1.fna&oh=00_AfDYUhP241ebcRfpwpcZK5dP2pDCQuwbD3YIqsk9YbXBNg&oe=648E45AE">
+   
+   
+     <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+   {% block meta %}
+   {% endblock %}
+   <title>
+    {% block title %}
+
+    {% endblock title %}
+</title>
+
+
+
+
+<!-- font awesome cdn link  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- custom css file link  -->
+<link rel="stylesheet" href="{% static  '/css/style.css' %}">
+{% block links %}
+{% endblock links %}
+
+
+</head>
+
+<body>
+
+   {% block msg %}
+   
+   {% if messages %}
+   {% for msg in messages %}
+   <div class="msg {{msg.tags}}">
+      {{msg.message}}
+   </div>
+   {% endfor %}
+   {% endif %}
+   
+   {% endblock msg %}
+
+{% block nav %}
+<!-- header section starts  -->
+
+<section class="header">
+   <a href="{% url 'home' %}" class="logo"></a>
+   <div class="contain">
+       </div>
+       <div class="box1">
+          Devam Career Hub
+       </div>
+       <div class="sss">
+          First Choice
+       </div>
+       
+       <nav class="navbar">
+          <a href="{% url 'home' %}">Home</a>
+          <a href="{% url 'home' %}#second">Program</a>
+          <a href="{% url 'blogs' %}">Blogs</a>
+          <a href="{% url 'home' %}#third">Contact</a>
+          <a href="{% url 'home' %}#about">About us</a>
+          {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}">Logout</a>
+          {% else %}
+          <a href="{% url 'login' %}">Login</a>
+          {% endif %}
+ 
+       </nav>
+ 
+       <div id="menu-btn" class="fas fa-bars"></div>
+ 
+    </section>
+ 
+    <!-- header section ends -->
+{% endblock nav %}
+
+
+{% block body %}
+
+{% endblock body %}
+
+ <!-- footer section starts  -->
+
+ <section class="footer">
+
+    <div class="box-container">
+
+       <div class="box">
+          <h3>Quick links</h3>
+          <a href="{% url 'home' %}"> <i class="fas fa-angle-right"></i> Home</a>
+          <a href="#about"> <i class="fas fa-angle-right"></i> About</a>
+          <a href="{% url 'blogs' %} "><i class="fas fa-angle-right"></i> Blogs</a>
+          <a href="#first"> <i class="fas fa-angle-right"></i>program</a>
+       </div>
+
+       <div class="box">
+          <h3>Mail Us</h3>
+          <a href="mailto:Laxmi@devamcareerhub.com"> <i class="fas fa-envelope"></i>Laxmi@devamcareerhub.com</a>
+          <a href="mailto:Niraj@devamcareerhub.com"> <i class="fas fa-envelope"></i>devamcareer@gmail.com</a>
+       </div>
+       <div id="third">
+          <div class="box">
+             <h3>contact info</h3>
+             <a href="tel:+9779829717887"> <i class="fas fa-phone"></i> +9779829717887 </a>
+             <a href="tel:+971581287494"> <i class="fas fa-phone"></i> +971581287494</a>
+             <a href="mailto:info2@devam.ae"> <i class="fas fa-envelope"></i>devamcareer@gmail.com</a>
+             <a href="#"> <i class="fas fa-map"></i>NEPAL purwa line,near I-cinema,Itahari-6,sunsari</a>
+             <a href="#"> <i class="fas fa-map"></i>UNITED ARAB EMIRATES 2nd Floor,khalid Bin AI Waleed Building
+                ,Sharaf DG metro exit 3,bur Dudai-Dubai</a>
+             <a href="location.html" class="btn">Track Us</a>
+          </div>
+       </div>
+
+       <div class="box">
+          <h3>follow us</h3>
+          <a target="_blank" href="https://www.facebook.com/profile.php?id=100089926244683"> <i
+                class="fab fa-facebook-f"></i> facebook </a>
+          <a target="_blank" href="https://www.facebook.com/photo/?fbid=134595889547952&set=a.129973426676865"> <i
+                class="fab fa-twitter"></i> twitter </a>
+          <a target="_blank" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2F%3Ffbclid%3DIwAR2OeHTQZVr89yKmMcJuI53pAEZ3HE4lJ-HNmBokxZdhBCPqoeU1znhttPQ&h=AT1HhHNG5VC8NtcWpsNWVWiPDRCdqgYnYaqy6qfcvq49k18NCr366w6ZA4kB47SIYNugQG8fdiIsa1p3HBzHR94deM9sGe1JOTnMnGpYYdRMzEc4vkcW0XCMk-dVoRsHC0F6Ew"> <i
+                class="fab fa-instagram"></i> instagram </a>
+          <a target="_blank" href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2F%3Ffbclid%3DIwAR2OeHTQZVr89yKmMcJuI53pAEZ3HE4lJ-HNmBokxZdhBCPqoeU1znhttPQ&h=AT1HhHNG5VC8NtcWpsNWVWiPDRCdqgYnYaqy6qfcvq49k18NCr366w6ZA4kB47SIYNugQG8fdiIsa1p3HBzHR94deM9sGe1JOTnMnGpYYdRMzEc4vkcW0XCMk-dVoRsHC0F6Ew"> <i class="fab fa-linkedin"></i> linkedin </a>
+       </div>
+    </div>
+
+    <div class="credit"> <span>Copyright &copy; Devam Career Hub</span> | all rights reserved! </div>
+
+ </section>
+
+ <!-- footer section ends -->
+
+
+ <!-- swiper js link  -->
+ 
+
+ {% block scripts %}
+ {% endblock scripts %}
+ <script src="{% static 'js/script.js' %}"></script>
+
+ {% if messages %}
+ <script>
+
+   //Message popup
+   const msgBox = document.querySelector(".msg");
+
+   setTimeout(()=>{
+      msgBox.style.transform = "translateX(100%)"
+   }, 2000)
+   setTimeout(()=>{
+      msgBox.style.display = "none";
+
+   }, 3000);
+
+ </script>
+
+ {% endif %}
+
+</body>
+
+</html>

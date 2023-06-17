@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block meta %}{% endblock meta %}
+
+{% block title %} Write A Blog {% endblock title %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/writeBlog.css' %}">
+
+{% endblock links %}
+
+{% block body %}
+
+<div class="container" style="margin-top: 5rem;">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="{{blog_form.title.html_name}}" placeholder="Blog title"
+            id="{{blog_form.title.auto_id}}">
+
+        <textarea class="short-desc" maxlength="500" name="{{blog_form.short_desc.html_name}}"
+            id="{{blog_form.short_desc.auto_id}}" cols="30" rows="10"
+            placeholder="Short Description (500 letters)"></textarea>
+
+            {% include "richTextEditor.html" with form_name=blog_form.blog_body.html_name form_id=blog_form.blog_body.auto_id %}
+            
+        <input type="submit" class="btn" value="Post">
+    </form>
+</div>
+
+
+{% endblock body %}
+
+
+{% block scripts %}
+
+<!-- JS for rich text editor -->
+<script>
+    tinymce.init({
+        selector: '#{{blog_form.blog_body.auto_id}}',
+        theme: 'silver',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        height: window.innerHeight * 90 / 100
+    });
+</script>
+
+{% endblock scripts %}

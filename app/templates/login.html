@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block meta %}{% endblock meta %}
+
+{% block title %}Login{% endblock title %}
+
+{% block links %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+
+{% endblock links %}
+
+{% block nav %}
+
+<a href="{% url 'home' %}" > <button class="btn">Home</button></a>
+
+{% block msg %}
+{% endblock %}
+
+{% endblock nav %}
+
+{% block body %}
+
+
+<img class="wave" src="{% static 'images/wave.png' %}">
+<div class="container">
+	<div class="img">
+		<img src="{% static 'images/bg.svg' %}">
+	</div>
+	<div class="login-content">
+		<form method="POST">
+			{% csrf_token %}
+			<img src="{% static 'images/dch.jpg' %}">
+			<h2 class="title">Welcome</h2>
+			<div class="input-div one">
+				<div class="i">
+					<i class="fas fa-user"></i>
+				</div>
+				<div class="div">
+					<h5>Username</h5>
+					<input type="text" name="username" class="input">
+				</div>
+			</div>
+			<div class="input-div pass">
+				<div class="i">
+					<i class="fas fa-lock"></i>
+				</div>
+				<div class="div">
+					<h5>Password</h5>
+					<input type="password" name="password" class="input">
+				</div>
+			</div>
+			<a href="#">Forgot Password?</a>
+			
+			{% if messages %}
+			{% for msg in messages %}
+			<p style="color: red; font-weight: bold; font-size: large;" class="{{msg.tags}}">{{msg.message}}</p>
+			{% endfor %}
+			{% endif %}
+
+			<input type="submit" class="btn" value="Login">
+		</form>
+	</div>
+</div>
+
+{% endblock body %}
+
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+
+{% endblock scripts %}

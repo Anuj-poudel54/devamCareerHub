@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block meta %}{% endblock meta %}
+
+{% block title %}{{blog.title}}{% endblock title %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/writeBlog.css' %}">
+<link rel="stylesheet" href="{% static 'css/blogs.css' %}">
+
+<!-- swiper    js link  -->
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+{% endblock links %}
+
+{% block body %}
+
+<div class="blog container">
+    <h2 class="title">
+        {{blog.title}}
+    </h2>
+    <small>Last Updated: {{blog.created_on}}</small>
+
+    {% if user.is_authenticated %}
+
+    <div class="action-buttons">
+        <a href="{% url 'edit' blog.slug %}"><button>Edit</button></a>
+        <a href="{% url 'delete-blog' blog.slug %}"><button>Delete</button></a>
+    </div>
+    {% endif %}
+    <hr>
+
+    {{blog.blog_body|safe}}
+
+</div>
+
+{% endblock body %}
+
+
+{% block scripts %}
+
+{% endblock scripts %}
