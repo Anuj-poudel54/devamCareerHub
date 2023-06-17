@@ -15,9 +15,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['devamcareerhub.com', 'www.devamcareerhub.com']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(",")
 
 
 # Application definition
@@ -116,14 +116,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join('/home', 'devamcar' ,'www', 'static')
-
-# STATICFILES_DIRS = [
-#     BASE_DIR, 'static',
-# ]
-
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join('/home', 'devamcar' ,'www', 'media')
+
+if not DEBUG:
+    STATIC_ROOT = os.environ.get('STATIC_ROOT')
+    MEDIA_ROOT = os.environ.get('MEDIA_ROOT')
+else:
+    MEDIA_ROOT = BASE_DIR/os.environ.get('MEDIA_ROOT')
+    STATICFILES_DIRS = [
+        BASE_DIR/os.environ.get('STATIC_ROOT')
+    ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -134,5 +136,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/login'
 
 # For not transmitting CSRF token in http.
-CSRF_COOKIE_SECURE = True
-
+CSRF_COOKIE_SECURE = os.environ.get('DEBUG')
