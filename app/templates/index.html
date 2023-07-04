@@ -10,315 +10,281 @@
 
 
 <!-- swiper    js link  -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 {% endblock links %}
 
 {% block body %}
 
-   <!-- home section starts  -->
+<!-- home section starts  -->
 
-   <section class="home">
-      {% if request.user.is_authenticated %}
-      <div class="add-banner">
-         <form method="POST" onsubmit="{{banner_form.image.html_name}}.disabled=true; return true;" enctype="multipart/form-data">
+<section class="home">
+  {% if request.user.is_authenticated %}
+  <div class="add-banner">
+    <form method="POST" onsubmit="{{banner_form.image.html_name}}.disabled=true; return true;"
+      enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="{{banner_form.image.auto_id}}">
+        <p class="btn add-banner-label">Add New Banner</p>
+      </label>
+      {{ form.images.label_tag }}
+      {{ form.images }}
+
+      <input type="file" style="display:none;" id="{{banner_form.image.auto_id}}" class="actual-add-banner"
+        name="{{banner_form.image.html_name}}" multiple>
+    </form>
+  </div>
+  {% endif %}
+
+  <div class="swiper home-slider">
+
+    <div class="swiper-wrapper">
+
+      {% for banner_image in banner_images %}
+      <div class="swiper-slide slide" style="background:url({{banner_image.image.url}}) no-repeat">
+
+        {% if request.user.is_authenticated %}
+        <div class="delete-banner">
+
+          <a href="{% url 'delete-banner-image' banner_image.uid %}" class="btn">Delete</a>
+        </div>
+        {% endif %}
+      </div>
+
+
+      {% endfor %}
+    </div>
+    {% if banner_images.count > 1 %}
+    <div class="swiper-button-next swiper"></div>
+    <div class="swiper-button-prev swiper"></div>
+    {% endif %}
+
+  </div>
+
+
+
+
+</section>
+
+
+<!-- services section ends -->
+
+<!-- home about section starts  -->
+
+<section class="home-about" id="about">
+
+  <div class="image">
+    <img src="{% static 'images/dch.jpg' %}" alt="">
+  </div>
+
+  <div class="content">
+    <h3>About us</h3>
+    <p>DCH is established with the motive to provide up-to –Date College and university information, right
+      academic counseling, visa documentation guidelines and fast service. Two approaches are very
+      important to us at DCH firstly, understand your profile and then giving professional legal advice with
+      unmatched personal attention to each one of our clients in obtaining their visas.</p>
+    <a href="{% url 'about' %}" class="btn">Read more</a>
+  </div>
+
+</section>
+
+<section class="home-packages">
+  <div id="second">
+    <h3 class="heading-title"> Program </h3>
+
+    <div class="box-container">
+
+      <div class="box">
+        <div class="image">
+          <img src="{% static 'images/visa1.jpg' %}" alt="">
+        </div>
+        <div class="content">
+          <h3> STUDENT VISA</h3>
+          <p> UAE,Malta,Australia,New Zealand,canada&UK</p>
+
+
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="image">
+          <img src="{% static 'images/language.png' %}" alt="">
+        </div>
+        <div class="content">
+          <h3>LANGUAGE</h3>
+          <p> IETPS,PTE,Japanese & other more classes</p>
+
+
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="image">
+          <img src="{% static 'images/student.jpg' %}" alt="">
+        </div>
+        <div class="content">
+          <h3>TUTION</h3>
+          <p> Demand on Student</p>
+
+        </div>
+
+
+
+      </div>
+
+      <div class="box">
+        <div class="image">
+          <img src="{% static 'images/language.png' %}" alt="">
+        </div>
+        <div class="content">
+          <h3>Jobs</h3>
+          <p></p>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+</section>
+
+
+<!-- home packages section ends -->
+
+<!-- home offer section starts  -->
+
+<section class="home-offer">
+  <div class="content">
+    <h3>UP TO 100% scholarship</h3>
+    <p>Devam Career is for personalized guidance at every step.You can use various resources to find study abroad
+      scholarships: university websites, online scholarship databases, official study abroad pages for individual
+      countries, and so on. The most common types of scholarships are academic or merit-based, need-based,
+      athletic-based, region or minority-based, etc.</p>
+    <a href="#third" class="btn">Contact Now</a>
+  </div>
+</section>
+
+<!-- home offer section ends -->
+
+<div class="testmn-card-wrapper">
+
+  {% if request.user.is_authenticated %}
+  <!-- Button trigger modal -->
+  <button style="align-self:flex-start;" type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+    Add Testimonial
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Testimonial</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form method="POST" action="{% url 'add-testmn' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="{{banner_form.image.auto_id}}">
-               <p class="btn add-banner-label">Add New Banner</p>
-            </label>
-            {{ form.images.label_tag }}
-            {{ form.images }}
-            
-            <input type="file" style="display:none;" id="{{banner_form.image.auto_id}}" class="actual-add-banner" name="{{banner_form.image.html_name}}" multiple>
-         </form>
-      </div>
-      {% endif %}
-      
-      <div class="swiper home-slider">
-
-         <div class="swiper-wrapper">
-
-            {% for banner_image in banner_images %}
-            <div class="swiper-slide slide" style="background:url({{banner_image.image.url}}) no-repeat">
-
-               {% if request.user.is_authenticated %}
-               <div class="delete-banner">
-                  
-                  <a href="{% url 'delete-banner-image' banner_image.uid %}" class="btn">Delete</a>
-               </div>
-                {% endif %}
-            </div>
-
-
-            {% endfor %}
-         </div>
-         {% if banner_images.count > 1 %}
-         <div class="swiper-button-next swiper"></div>
-         <div class="swiper-button-prev swiper"></div>
-         {% endif %}
-
- </div>
-      
-      
-
-
-   </section>
-
-
-   <!-- services section ends -->
-
-   <!-- home about section starts  -->
-
-   <section class="home-about" id="about">
-
-      <div class="image">
-         <img src="{% static 'images/dch.jpg' %}" alt="">
-      </div>
-
-      <div class="content">
-         <h3>About us</h3>
-         <p>DCH is established with the motive to provide up-to –Date College and university information, right
-            academic counseling, visa documentation guidelines and fast service. Two approaches are very
-            important to us at DCH firstly, understand your profile and then giving professional legal advice with
-            unmatched personal attention to each one of our clients in obtaining their visas.</p>
-         <a href="{% url 'about' %}" class="btn">Read more</a>
-      </div>
-
-   </section>
-
-   <section class="home-packages">
-      <div id="second">
-         <h3 class="heading-title"> Program </h3>
-
-         <div class="box-container">
-
-            <div class="box">
-               <div class="image">
-                  <img src="{% static 'images/visa1.jpg' %}" alt="">
-               </div>
-               <div class="content">
-                  <h3> STUDENT VISA</h3>
-                  <p> UAE,Malta,Australia,New Zealand,canada&UK</p>
-                  
-                
-               </div>
-            </div>
-
-            <div class="box">
-               <div class="image">
-                  <img src="{% static 'images/language.png' %}" alt="">
-               </div>
-               <div class="content">
-                  <h3>LANGUAGE</h3>
-                  <p> IETPS,PTE,Japanese & other more classes</p>
-                  
-    
-               </div>
-            </div>
-
-            <div class="box">
-               <div class="image">
-                  <img src="{% static 'images/student.jpg' %}" alt="">
-               </div>
-               <div class="content">
-                  <h3>TUTION</h3>
-                  <p>  Demand on Student</p>
-                 
-               </div>
-               
-               
-               
-            </div>
-
-<div class="box">
-               <div class="image">
-                  <img src="{% static 'images/language.png' %}" alt="">
-               </div>
-               <div class="content">
-                  <h3>Jobs</h3>
-                  <p></p>
-                
-    
-               </div>
-            </div>
-         </div>
-         
-                
-        
-
-   </section>
-
-
-   <!-- home packages section ends -->
-
-
-   <div class="card">
-   <section class="swiper mySwiper">
-
-      <div class="swiper-wrapper">
-  
-        <div class="card swiper-slide">
-          <div class="card__image">
-            <img src="{% static 'images/user.jpg' %}" alt="card image">
-          </div>
-  
-          <div class="card__content">
-            <span class="card__title">Sabin Siwakoti</span>
-            <span class="card__name">Nepal</span>
-            <p class="card__text">"Sincer,thanks to all dedicate service given by the whole Devam career Team."</p>
-    
-          </div>
-        </div>
-  
-        <div class="card swiper-slide">
-          <div class="card__image">
-            <img src="{% static 'images/user2.jpg' %}" alt="card image">
-          </div>
-  
-          <div class="card__content">
-            <span class="card__title">Anju poudel</span>
-            <span class="card__name">India</span>
-            <p class="card__text">"I found that Devam career is best consultancy and i want to thanks all the team member"</p>
-          
-          </div>
-        </div>
-  
-        <div class="card swiper-slide">
-          <div class="card__image">
-            <img src=".................." alt="card image">
-          </div>
-  
-          <div class="card__content">
-            <span class="card__title">sssssssss</span>
-            <span class="card__name">ssssssss</span>
-            <p class="card__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit veritatis labore provident non tempora odio est sunt, ipsum</p>
-          </div>
-        </div>
-  
-        <div class="card swiper-slide">
-          <div class="card__image">
-            <img src="" alt="card image">
-          </div>
-  
-          <div class="card__content">
-            <span class="card__title">asasa</span>
-            <span class="card__name">asas</span>
-            <p class="card__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit veritatis labore provident non tempora odio est sunt, ipsum</p>
-          </div>
-        </div>
-  
-      </div>
-    </section>
-   </div>
-
-   <!-- home offer section starts  -->
-
-   <section class="home-offer">
-      <div class="content">
-         <h3>UP TO 100% scholarship</h3>
-         <p>Devam Career is for personalized guidance at every step.You can use various resources to find study abroad scholarships: university websites, online scholarship databases, official study abroad pages for individual countries, and so on. The most common types of scholarships are academic or merit-based, need-based, athletic-based, region or minority-based, etc.</p>
-         <a href="#third" class="btn">Contact Now</a>
-      </div>
-   </section>
-
-   <!-- home offer section ends -->
-
-   <div class="testmn-card-wrapper">
-      {% comment %} <input type="submit" value="Update" class="btn"> {% endcomment %}
-      <!-- Button trigger modal -->
-   <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-      Add Testimonial
-   </button>
- 
- <!-- Modal -->
- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog" role="document">
-     <div class="modal-content">
-       <div class="modal-header">
-         <h5 class="modal-title" id="exampleModalLabel">Add New Testimonial</h5>
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-         </button>
-       </div>
-       <div class="modal-body">
-
-         <form>
             <div class="form-group">
               <label for="exampleFormControlInput1">Name</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+              <input type="text" class="form-control" name="{{testimonial_form.name.html_name}}"
+                id="exampleFormControlInput1" placeholder="Name">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Location</label>
+              <input type="text" class="form-control" name="{{testimonial_form.location.html_name}}"
+                id="exampleFormControlInput1" placeholder="Location">
             </div>
 
             <label for="exampleFormControlFile1">Select image</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-          </div>
-            
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Testimonial Message</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <input type="file" class="form-control-file" name="{{testimonial_form.image.html_name}}"
+              id="exampleFormControlFile1">
+
+            <div class="form-control">
+              <label for="exampleFormControlTextarea1" class="form-label">Testimonial message</label>
+              <textarea class="form-control" name="{{testimonial_form.desc.html_name}}" id="exampleFormControlTextarea1"
+                rows="3"></textarea>
             </div>
-         </form>
 
-       </div>
-       <div class="modal-footer">
-         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         <button type="button" class="btn btn-primary">Add</button>
-       </div>
-     </div>
-   </div>
+            <button type="Submit" class="btn btn-primary">Add</button>
+          </form>
 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 
-   <section class="swiper mySwiper">
-    
-        <div class="swiper-wrapper">
-    
-          <div class="card swiper-slide">
-            <div class="card__image">
-              <img src="{% static 'images/user.jpg' %} " alt="card image">
-            </div>
-    
-            <div class="card__content">
-              <span class="card__title">Sabin Siwakoti</span>
-              <span class="card__name">Nepal</span>
-              <q class="card__text">Sincer,thanks to all dedicate service given by the whole Devam career Team.</q>
-      
-            </div>          
-          </div>
-          </div>
-      </section>
-   </div>
-   </div>
-   
+  <section class="swiper mySwiper">
+    <h2 style="text-align: center;">Testimonials</h2>
+
+    <div class="swiper-wrapper">
+
+      {% for testmn in testimonials %}
+      <div class="card swiper-slide">
+        <div class="card__image">
+          <img src="{{testmn.image.url}}" alt="card image">
+        </div>
+
+        <div class="card__content">
+          <span class="card__title">{{testmn.name}}</span>
+          <span class="card__name">{{testmn.location}}</span>
+          <q class="card__text">{{testmn.desc}}</q>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+</div>
+
 {% endblock body %}
 
 
 {% block scripts %}
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
-    <!-- Initialize Swiper -->
-    <script>
-      var swiper = new Swiper(".mySwiper", {
-        effect: "coverflow",
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: "auto",
-        coverflowEffect: {
-          rotate: 0,
-          stretch: 0,
-          depth: 300,
-          modifier: 1,
-          slideShadows: false,
-        },
-        pagination: {
-          el: ".swiper-pagination",
-        },
-      });
-    </script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    coverflowEffect: {
+      rotate: 0,
+      stretch: 0,
+      depth: 300,
+      modifier: 1,
+      slideShadows: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+</script>
 
 {% endblock scripts %}

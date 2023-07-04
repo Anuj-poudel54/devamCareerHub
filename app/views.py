@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from . import models
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from .forms import BannerForm, BlogForm
+from .forms import BannerForm, BlogForm, TestimonialForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
@@ -17,7 +17,13 @@ def home(request):
 
     banner_images = models.Banner.objects.all().order_by('-created_on')
     banner_form = BannerForm()
-    return render(request, 'index.html', {'banner_images': banner_images, 'banner_form': banner_form})
+    testimonial_form = TestimonialForm()
+    testimonials = models.Testimonial.objects.all()
+    context = {'banner_images': banner_images,
+               'banner_form': banner_form,
+                'testimonial_form': testimonial_form,
+                'testimonials': testimonials}
+    return render(request, 'index.html', context)
 
 def about(request):
     return render(request, 'read.html')
@@ -118,3 +124,15 @@ def login_user(request):
 
 def handle_404(request):
     return render(request, 'page404.html')
+
+@login_required
+def add_testmn(request):
+    if request.method == "POST":
+        testmn_data = TestimonialForm(request.POST, request.FILES)
+        if testmn_data.is_valid():
+            testmn_data.save()
+            messages.success(request, "Testimonial added successfully!")
+
+        else:
+            messages.error(request, "Something went wrong!")
+    return redirect('/')

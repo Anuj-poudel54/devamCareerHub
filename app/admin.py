@@ -10,3 +10,7 @@ class BannerAdmin(admin.ModelAdmin):
 @admin.register(Blog)
 class BlogAdming(admin.ModelAdmin):
     list_display = ['uid','title', 'short_desc', 'blog_body', 'slug', 'created_on']
+
+@admin.register(Testimonial)
+class BlogAdming(admin.ModelAdmin):
+    list_display = ['uid','name', 'location', 'desc', 'image', 'created_on']
