@@ -150,6 +150,66 @@
 
    <!-- home packages section ends -->
 
+
+   <div class="card">
+   <section class="swiper mySwiper">
+
+      <div class="swiper-wrapper">
+  
+        <div class="card swiper-slide">
+          <div class="card__image">
+            <img src="{% static 'images/user.jpg' %}" alt="card image">
+          </div>
+  
+          <div class="card__content">
+            <span class="card__title">Sabin Siwakoti</span>
+            <span class="card__name">Nepal</span>
+            <p class="card__text">"Sincer,thanks to all dedicate service given by the whole Devam career Team."</p>
+    
+          </div>
+        </div>
+  
+        <div class="card swiper-slide">
+          <div class="card__image">
+            <img src="{% static 'images/user2.jpg' %}" alt="card image">
+          </div>
+  
+          <div class="card__content">
+            <span class="card__title">Anju poudel</span>
+            <span class="card__name">India</span>
+            <p class="card__text">"I found that Devam career is best consultancy and i want to thanks all the team member"</p>
+          
+          </div>
+        </div>
+  
+        <div class="card swiper-slide">
+          <div class="card__image">
+            <img src=".................." alt="card image">
+          </div>
+  
+          <div class="card__content">
+            <span class="card__title">sssssssss</span>
+            <span class="card__name">ssssssss</span>
+            <p class="card__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit veritatis labore provident non tempora odio est sunt, ipsum</p>
+          </div>
+        </div>
+  
+        <div class="card swiper-slide">
+          <div class="card__image">
+            <img src="" alt="card image">
+          </div>
+  
+          <div class="card__content">
+            <span class="card__title">asasa</span>
+            <span class="card__name">asas</span>
+            <p class="card__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit veritatis labore provident non tempora odio est sunt, ipsum</p>
+          </div>
+        </div>
+  
+      </div>
+    </section>
+   </div>
+
    <!-- home offer section starts  -->
 
    <section class="home-offer">
@@ -166,5 +226,28 @@
 
 
 {% block scripts %}
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 300,
+        modifier: 1,
+        slideShadows: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+    });
+  </script>
 
 {% endblock scripts %}

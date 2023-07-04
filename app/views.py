@@ -118,4 +118,3 @@ def login_user(request):
 
 def handle_404(request):
     return render(request, 'page404.html')
-
