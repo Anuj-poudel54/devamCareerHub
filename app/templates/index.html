@@ -9,11 +9,16 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
 
 <!-- swiper    js link  -->
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 {% endblock links %}
 
 {% block body %}
+
 
    <!-- home section starts  -->
 
@@ -57,11 +62,9 @@
          {% endif %}
 
  </div>
-      
-      
-
 
    </section>
+   
 
 
    <!-- services section ends -->
@@ -161,10 +164,141 @@
    </section>
 
    <!-- home offer section ends -->
+   
+   <div class="card">
+      {% comment %} <input type="submit" value="Update" class="btn"> {% endcomment %}
+      <!-- Button trigger modal -->
+   <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+      Add Testimonial
+   </button>
+ 
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Add New Testimonial</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
 
+         <form>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Name</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+            </div>
+
+            <label for="exampleFormControlFile1">Select mage</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+          </div>
+            
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Testimonial Message</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+         </form>
+
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary">Add</button>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+   <section class="swiper mySwiper">
+    
+        <div class="swiper-wrapper">
+    
+          <div class="card swiper-slide">
+            <div class="card__image">
+              <img src="{% static 'images/user.jpg' %} " alt="card image">
+            </div>
+    
+            <div class="card__content">
+              <span class="card__title">Sabin Siwakoti</span>
+              <span class="card__name">Nepal</span>
+              <q class="card__text">Sincer,thanks to all dedicate service given by the whole Devam career Team.</q>
+      
+            </div>
+          </div>
+    
+          <div class="card swiper-slide">
+            <div class="card__image">
+              <img src="{% static 'images/user2.jpg' %}" alt="card image">
+            </div>
+    
+            <div class="card__content">
+              <span class="card__title">Anju poudel</span>
+              <span class="card__name">India</span>
+              <q class="card__text">I found that Devam career is best consultancy and i want to thanks all the team member</q>
+            
+            </div>
+          </div>
+    
+          <div class="card swiper-slide">
+            <div class="card__image">
+              <img src=".................." alt="card image">
+            </div>
+    
+            <div class="card__content">
+              <span class="card__title">sssssssss</span>
+              <span class="card__name">ssssssss</span>
+              <p class="card__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit veritatis labore provident non tempora odio est sunt, ipsum</p>
+            </div>
+          </div>
+    
+          <div class="card swiper-slide">
+            <div class="card__image">
+              <img src=" alt="card image">
+            </div>
+    
+            <div class="card__content">
+              <span class="card__title">asasa</span>
+              <span class="card__name">asas</span>
+              <p class="card__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit veritatis labore provident non tempora odio est sunt, ipsum</p>
+            </div>
+          </div>
+    
+        </div>
+      </section>
+   </div>
+   
 {% endblock body %}
 
 
 {% block scripts %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+          rotate: 0,
+          stretch: 0,
+          depth: 300,
+          modifier: 1,
+          slideShadows: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+        },
+      });
+    </script>
 
 {% endblock scripts %}
