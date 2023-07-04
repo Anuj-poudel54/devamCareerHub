@@ -241,8 +241,12 @@
           <span class="card__title">{{testmn.name}}</span>
           <span class="card__name">{{testmn.location}}</span>
           <q class="card__text">{{testmn.desc}}</q>
-
         </div>
+
+        <div class="action">
+          <a href="{% url 'del-testmn' testmn.uid %}" class="btn">Delete</a>
+        </div>
+
       </div>
       {% endfor %}
     </div>

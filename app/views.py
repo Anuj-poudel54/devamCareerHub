@@ -136,3 +136,17 @@ def add_testmn(request):
         else:
             messages.error(request, "Something went wrong!")
     return redirect('/')
+
+@login_required
+def del_testmn(request, uid):
+
+    testmn = models.Testimonial.objects.filter(uid=uid)
+    if testmn.exists():
+        testmn.first().delete()
+        messages.success(request, "Testimonial deleted successfully!")
+
+    else:
+        messages.error(request, "Something went wrong!")
+        
+    return redirect("/")
+
