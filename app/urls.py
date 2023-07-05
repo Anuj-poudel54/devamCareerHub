@@ -16,7 +16,9 @@ urlpatterns = [
     path('del-blog/<slug:slug>/', views.delete, name='delete-blog'),
     path('login/', views.login_user, name='login'),
     path('add-testmn/', views.add_testmn, name='add-testmn'),
+    path('add-program/', views.add_program, name='add-program'),
     path('del-testmn/<uuid:uid>', views.del_testmn, name='del-testmn'),
+    path('del-program/<uuid:uid>', views.del_program, name='del-program'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 

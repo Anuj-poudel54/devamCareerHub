@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from . import models
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from .forms import BannerForm, BlogForm, TestimonialForm
+from .forms import BannerForm, BlogForm, TestimonialForm, ProgramForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
@@ -18,11 +18,18 @@ def home(request):
     banner_images = models.Banner.objects.all().order_by('-created_on')
     banner_form = BannerForm()
     testimonial_form = TestimonialForm()
+    program_form = ProgramForm()
+
     testimonials = models.Testimonial.objects.all()
+    programs = models.Program.objects.all().order_by("-created_on")
+
     context = {'banner_images': banner_images,
                'banner_form': banner_form,
                 'testimonial_form': testimonial_form,
-                'testimonials': testimonials}
+                'testimonials': testimonials,
+                'program_form': program_form,
+                'programs': programs}
+    
     return render(request, 'index.html', context)
 
 def about(request):
@@ -138,12 +145,37 @@ def add_testmn(request):
     return redirect('/')
 
 @login_required
+def add_program(request):
+    if request.method == "POST":
+        program_data = ProgramForm(request.POST, request.FILES)
+        if program_data.is_valid():
+            program_data.save()
+            messages.success(request, "Program added successfully!")
+
+        else:
+            messages.error(request, "Enter valid data. Check for emtpy fields or valid image.")
+    return redirect('/')
+
+@login_required
 def del_testmn(request, uid):
 
     testmn = models.Testimonial.objects.filter(uid=uid)
     if testmn.exists():
         testmn.first().delete()
         messages.success(request, "Testimonial deleted successfully!")
+
+    else:
+        messages.error(request, "Something went wrong!")
+        
+    return redirect("/")
+
+@login_required
+def del_program(request, uid):
+
+    program = models.Program.objects.filter(uid=uid)
+    if program.exists():
+        program.first().delete()
+        messages.success(request, "Program deleted successfully!")
 
     else:
         messages.error(request, "Something went wrong!")

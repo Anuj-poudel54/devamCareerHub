@@ -44,3 +44,12 @@ class Testimonial(ModelBase):
     def delete(self, using=None, keep_parents=False) -> Tuple[int, Dict[str, int]]:
         os.remove(os.path.join(settings.MEDIA_ROOT, self.image.path))
         return super().delete(using, keep_parents)
+
+class Program(ModelBase):
+    title = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='uploads/')
+    desc = models.TextField()
+
+    def delete(self, using=None, keep_parents=False) -> Tuple[int, Dict[str, int]]:
+        os.remove(os.path.join(settings.MEDIA_ROOT, self.image.path))
+        return super().delete(using, keep_parents)

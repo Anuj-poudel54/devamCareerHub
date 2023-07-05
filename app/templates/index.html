@@ -91,59 +91,77 @@
 
 <section class="home-packages">
   <div id="second">
-    <h3 class="heading-title"> Program </h3>
+    <div class="add-program">
+      {% if request.user.is_authenticated %}
+      <!-- Button trigger modal -->
+      <button style="align-self:flex-start;" type="button" class="btn" data-toggle="modal" data-target="#programModal">
+        Add New Program
+      </button>
+    
+      <!-- Modal -->
+      <div class="modal fade" id="programModal" tabindex="-1" role="dialog" aria-labelledby="programModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="programModalLabel">Add New Program</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+    
+              <form method="POST" action="{% url 'add-program' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Program Title</label>
+                  <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" name="{{program_form.title.html_name}}"
+                    id="exampleFormControlInput1" placeholder="Program title">
+                </div>
+    
+                <label for="programFormControlFile1">Select template image</label>
+                <input type="file" class="form-control-file" name="{{program_form.image.html_name}}"
+                  id="programFormControlFile1">
+    
+                <div class="form-control">
+                  <label for="programFormControlTextarea1" class="form-label">Program Description</label>
+                  <textarea class="form-control" name="{{program_form.desc.html_name}}" id="programFormControlTextarea1"
+                    rows="10"></textarea>
+                </div>
+    
+                <button type="Submit" class="btn btn-primary">Add Program</button>
+              </form>
+    
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <h3 class="heading-title" id="programs"> Programs </h3>
 
     <div class="box-container">
 
+      {% for program in programs %}
       <div class="box">
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'del-program' program.uid %}" class="btn btn-danger">Del</a>
+        {% endif %}
         <div class="image">
-          <img src="{% static 'images/visa1.jpg' %}" alt="">
+          <img src="{{program.image.url}}" alt="">
         </div>
         <div class="content">
-          <h3> STUDENT VISA</h3>
-          <p> UAE,Malta,Australia,New Zealand,canada&UK</p>
-
-
+          <h3> {{program.title}} </h3>
+          <p>{{program.desc}}</p>
         </div>
       </div>
+      {% endfor %}
 
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/language.png' %}" alt="">
-        </div>
-        <div class="content">
-          <h3>LANGUAGE</h3>
-          <p> IETPS,PTE,Japanese & other more classes</p>
-
-
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/student.jpg' %}" alt="">
-        </div>
-        <div class="content">
-          <h3>TUTION</h3>
-          <p> Demand on Student</p>
-
-        </div>
-
-
-
-      </div>
-
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/language.png' %}" alt="">
-        </div>
-        <div class="content">
-          <h3>Jobs</h3>
-          <p></p>
-
-
-        </div>
-      </div>
     </div>
 
 
@@ -173,12 +191,12 @@
 
   {% if request.user.is_authenticated %}
   <!-- Button trigger modal -->
-  <button style="align-self:flex-start;" type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+  <button style="align-self:flex-start;" type="button" class="btn" data-toggle="modal" data-target="#testominalModal">
     Add Testimonial
   </button>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="testominalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -227,7 +245,7 @@
   {% endif %}
 
   <section class="swiper mySwiper">
-    <h2 style="text-align: center;">Testimonials</h2>
+    <h2 style="text-align: center;" id="testimonials">Testimonials</h2>
 
     <div class="swiper-wrapper">
 

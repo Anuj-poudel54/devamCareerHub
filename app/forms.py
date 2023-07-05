@@ -1,5 +1,4 @@
-from typing import Any
-from .models import Banner, Blog, Testimonial
+from .models import Banner, Blog, Testimonial, Program
 from django import forms
 
 class BannerForm(forms.ModelForm):
@@ -17,3 +16,8 @@ class TestimonialForm(forms.ModelForm):
     class Meta:
         model = Testimonial
         fields = ['name', 'image', 'location', 'desc']
+
+class ProgramForm(forms.ModelForm):
+    class Meta:
+        model = Program
+        fields = ['title', 'image', 'desc']
