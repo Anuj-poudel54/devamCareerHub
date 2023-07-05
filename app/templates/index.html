@@ -261,9 +261,11 @@
           <q class="card__text">{{testmn.desc}}</q>
         </div>
 
+        {% if request.user.is_authenticated %}
         <div class="action">
           <a href="{% url 'del-testmn' testmn.uid %}" class="btn">Delete</a>
         </div>
+        {% endif %}
 
       </div>
       {% endfor %}
