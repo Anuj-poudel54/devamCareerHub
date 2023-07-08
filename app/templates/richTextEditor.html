@@ -1,3 +1,12 @@
 
 <script src="https://cdn.tiny.cloud/1/e3w7rc1cari0u0nl25i34gfpjt9alop5yvxmbli8en5wq37t/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <textarea name="{{form_name}}" id="{{form_id}}" cols="30" rows="10">{{value}}</textarea>
+<script>
+    tinymce.init({
+        selector: '#{{form_id}}',
+        theme: 'silver',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo |  numlist bullist indent outdent  | bold italic underline strikethrough | align lineheight| blocks fontfamily fontsize  | emoticons charmap | removeformat | link image media table',
+        height: window.innerHeight * Number.parseFloat(`{{editor_height|default:90}}`) / 100
+    });
+</script>
