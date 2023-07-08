@@ -7,7 +7,7 @@
 {% block links %}
 
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'custom_static/css/login.css' %}">
 <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/a81368914c.js"></script>
 
@@ -25,15 +25,15 @@
 {% block body %}
 
 
-<img class="wave" src="{% static 'images/wave.png' %}">
+<img class="wave" src="{% static 'custom_static/images/wave.png' %}">
 <div class="container">
 	<div class="img">
-		<img src="{% static 'images/bg.svg' %}">
+		<img src="{% static 'custom_static/images/bg.svg' %}">
 	</div>
 	<div class="login-content">
 		<form method="POST">
 			{% csrf_token %}
-			<img src="{% static 'images/dch.jpg' %}">
+			<img src="{% static 'custom_static/images/dch.jpg' %}">
 			<h2 class="title">Welcome</h2>
 			<div class="input-div one">
 				<div class="i">
@@ -70,6 +70,6 @@
 
 
 {% block scripts %}
-<script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+<script type="text/javascript" src="{% static 'custom_static/js/login.js' %}"></script>
 
 {% endblock scripts %}
