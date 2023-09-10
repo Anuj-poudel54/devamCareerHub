@@ -1,0 +1,24 @@
+.container{
+    width: 95%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+textarea.short-desc{
+    border: 1px solid black;
+    padding: 2rem;
+    width: 100%;
+}
+
+input{
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 4rem;
+    border-bottom: 2px solid black;
+    width: 100%;
+}
+
+
+

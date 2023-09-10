@@ -1,10 +1,9 @@
-from typing import Any, Dict, Iterable, Optional, Tuple
+from typing import Dict,Tuple
 from django.db import models
 from uuid import uuid4
 import os
 from django.conf import settings
 from tinymce.models import HTMLField
-from django.utils.text import slugify
 from . import utils
 # Create your models here.
 
@@ -48,7 +47,7 @@ class Testimonial(ModelBase):
 class Program(ModelBase):
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to='uploads/')
-    desc = models.TextField()
+    desc = HTMLField()
 
     def delete(self, using=None, keep_parents=False) -> Tuple[int, Dict[str, int]]:
         os.remove(os.path.join(settings.MEDIA_ROOT, self.image.path))

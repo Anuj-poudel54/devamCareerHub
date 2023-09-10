@@ -75,7 +75,7 @@
 <section class="home-about" id="about">
 
   <div class="image">
-    <img src="{% static 'images/dch.jpg' %}" alt="">
+    <img src="{% static 'custom_static/images/dch.jpg' %}" alt="">
   </div>
 
   <div class="content">
@@ -101,7 +101,7 @@
       <!-- Modal -->
       <div class="modal fade" id="programModal" tabindex="-1" role="dialog" aria-labelledby="programModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog"  style="max-width: 70%;" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="programModalLabel">Add New Program</h5>
@@ -126,8 +126,9 @@
     
                 <div class="form-control">
                   <label for="programFormControlTextarea1" class="form-label">Program Description</label>
-                  <textarea class="form-control" name="{{program_form.desc.html_name}}" id="programFormControlTextarea1"
-                    rows="10"></textarea>
+                  <!-- <textarea class="form-control" name="{{program_form.desc.html_name}}" id="programFormControlTextarea1"
+                    rows="10"></textarea> -->
+                    {% include "richTextEditor.html" with form_name=program_form.desc.html_name form_id=program_form.desc.auto_id editor_height=50 %}
                 </div>
     
                 <button type="Submit" class="btn btn-primary">Add Program</button>
@@ -157,7 +158,7 @@
         </div>
         <div class="content">
           <h3> {{program.title}} </h3>
-          <p>{{program.desc}}</p>
+          {{program.desc|safe}}
         </div>
       </div>
       {% endfor %}
@@ -261,9 +262,11 @@
           <q class="card__text">{{testmn.desc}}</q>
         </div>
 
+        {% if request.user.is_authenticated %}
         <div class="action">
           <a href="{% url 'del-testmn' testmn.uid %}" class="btn">Delete</a>
         </div>
+        {% endif %}
 
       </div>
       {% endfor %}

@@ -6,7 +6,7 @@
 
 {% block links %}
 <!-- Custom css -->
-<link rel="stylesheet" href="{% static 'css/writeBlog.css' %}">
+<link rel="stylesheet" href="{% static 'custom_static/css/writeBlog.css' %}">
 
 <!-- tinymce rich text editor cdn -->
 <script src="https://cdn.tiny.cloud/1/b7t8xrl16ct87rgdqk3m9ukx3aw7u79t2fgsx4z94k9ahvgv/tinymce/6/tinymce.min.js"
@@ -33,15 +33,4 @@
 
 
 {% block scripts %}
-
-<!-- JS for rich text editor -->
-<script>
-    tinymce.init({
-        selector: '#{{blog_form.blog_body.auto_id}}',
-        theme: 'silver',
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-        height: window.innerHeight * 90 / 100,
-    });
-</script>
 {% endblock scripts %}
